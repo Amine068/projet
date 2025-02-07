@@ -12,6 +12,13 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="_password">
         <button type="submit">Login</button>
+        <input type="hidden">
     </form>
     <a href="{{ path('connect_google_start') }}">Login with Google</a>
+
+    {# {% if tarteaucitron.isConsentGiven('google') %}
+        <a href="{{ path('connect_google_start') }}" class="btn btn-google">Login with Google</a>
+    {% else %}
+        <p>Please accept cookies to enable Google login.</p>
+    {% endif %} #}
 {% endblock %}

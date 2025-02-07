@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Form\FormExtention\HoneyPotType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -15,10 +16,11 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
-class RegistrationFormType extends AbstractType
+class RegistrationFormType extends HoneyPotType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        parent::buildForm($builder, $options);
         $builder
         ->add('email', EmailType::class, [
             'label' => 'Email',
@@ -30,12 +32,12 @@ class RegistrationFormType extends AbstractType
             'required' => true,
             'first_options'  => ['label' => 'Mot de passe'],
             'second_options' => ['label' => 'Confirmation du mot de passe'],
-            'constraints' => [
-                new Regex([
-                    'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$/',
-                    'message' => 'Votre mot de passe est trop faible (1 minuscule, 1 majuscule, 1 chiffre, 1 caratère spécial et 12 caractere minmum)',
-                ])
-            ]
+            // 'constraints' => [
+            //     new Regex([
+            //         'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$/',
+            //         'message' => 'Votre mot de passe est trop faible (1 minuscule, 1 majuscule, 1 chiffre, 1 caratère spécial et 12 caractere minmum)',
+            //     ])
+            // ]
         ])
         ->add('agreeTerms', CheckboxType::class, [
             'mapped' => false,

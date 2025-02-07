@@ -20,9 +20,9 @@ security:
                 - App\Security\GoogleAuthenticator
             entry_point: form_login  # Set form_login as the entry point
     access_control:
-        - { path: ^/connect/google, roles: PUBLIC_ACCESS }  # Allow anonymous access to Google OAuth
-        - { path: ^/login, roles: PUBLIC_ACCESS }           # Allow anonymous access to the login page
-        - { path: ^/, roles: ROLE_USER }                   # Protect all other routes
+        - { path: ^/connect/google, roles: PUBLIC_ACCESS }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/, roles: PUBLIC_ACCESS }
                 # where to redirect after logout
                 # target: app_any_route
 
