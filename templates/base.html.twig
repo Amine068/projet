@@ -17,6 +17,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+        <link rel="stylesheet" href=" {{asset('css/style.css')}} ">
         {% endblock %}
         <style>
             .candy {
@@ -29,6 +30,7 @@
                 z-index: -1;
             }
         </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="/tarteaucitron/tarteaucitron.min.js"></script>
         
         <script type="text/javascript">
@@ -93,6 +95,40 @@
         {% endblock %}
     </head>
     <body>
+        <header class="header">
+            <div class="topHeaderContainer">
+                <a href="" class="headerTitle">Nom du projet</a>
+                <a href="" class="newPost">Déposer une annonce</a>
+                <div class="searchFormContainer">
+                    <form action="" class="searchbar" method="POST">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        {# <i class="fa-solid fa-magnifying-glass">
+                            <input type="submit" value="">
+                        </i> #}
+                        <input type="text" name="text" class="textSearch">
+                    </form>
+                </div>
+                <nav class="headerNavTop">
+                    <a href="" class="navElementTop">Favoris</a>
+                    <a href="" class="navElementTop">Messages</a>
+                    <a href="" class="navElementTop">Se connecter</a>
+                    <a href="" class="navElementTop">S'inscrire</a>
+                </nav>
+            </div>
+            <div class="bottomHeaderContainer">
+                <nav class="headerNavBottom">
+                    <a href="" class="navElementBottom">Vidéo & Son</a>
+                    <a href="" class="navElementBottom">Ordinateur</a>
+                    <a href="" class="navElementBottom">Accessoire ifnormatique</a>
+                    <a href="" class="navElementBottom">Photo & Caméscope</a>
+                    <a href="" class="navElementBottom">Téléphone</a>
+                    <a href="" class="navElementBottom">Jeu vidéo</a>
+                    <a href="" class="navElementBottom">Console</a>
+                    <a href="" class="navElementBottom">Electroménager</a>
+                    <a href="" class="navElementBottom">Autre accessoire</a>
+                </nav>
+            </div>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
