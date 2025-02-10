@@ -98,14 +98,11 @@
         <header class="header">
             <div class="topHeaderContainer">
                 <a href="" class="headerTitle">Nom du projet</a>
-                <a href="" class="newPost">Déposer une annonce</a>
+                <a href="{{ path('add_new_annonce') }}" class="newPost">Déposer une annonce</a>
                 <div class="searchFormContainer">
                     <form action="" class="searchbar" method="POST">
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        {# <i class="fa-solid fa-magnifying-glass">
-                            <input type="submit" value="">
-                        </i> #}
-                        <input type="text" name="text" class="textSearch">
+                        <input type="text" name="text" class="textSearch" placeholder="Rechercher une annonce">
                     </form>
                 </div>
                 <nav class="headerNavTop">
@@ -129,6 +126,41 @@
                 </nav>
             </div>
         </header>
-        {% block body %}{% endblock %}
+        <section class="main">
+            {% block body %}{% endblock %}
+        </section>
+        <footer>
+            <div class="footerTopContainer">
+                <div class="footerContainer">
+                    <a href="" class="footerTitle">A PROPOS</a>
+                    <a href="" class="footerElement">Qui sommes-nous</a>
+                    <a href="" class="footerElement">Nos engagements</a>
+                    <a href="" class="footerElement">Nous rejoindre</a>
+                    <a href="" class="footerElement">Nous contacter</a>
+                </div>
+                <div class="footerContainer">
+                    <a href="" class="footerTitle">CATEGORIE</a>
+                    <a href="" class="footerElement">Vidéo & Son</a>
+                    <a href="" class="footerElement">Ordinateur</a>
+                    <a href="" class="footerElement">Accessoire informatique</a>
+                    <a href="" class="footerElement">Photo & Caméscope</a>
+                    <a href="" class="footerElement">Téléphone</a>
+                    <a href="" class="footerElement">Jeu vidéo</a>
+                    <a href="" class="footerElement">Console</a>
+                    <a href="" class="footerElement">Electroménager</a>
+                    <a href="" class="footerElement">Autre accessoire</a>
+                </div>
+                <div class="footerContainer">
+                    <a href="" class="footerTitle">MENTIONS LEGALES</a>
+                    <a href="" class="footerElement">Conditions générales d'utilisation</a>
+                    <a href="" class="footerElement">Politique de confidentialité</a>
+                    <a href="" class="footerElement">Politique de protection des données</a>
+                    <a href="" class="footerElement">Cookies</a>
+                </div>
+                <div class="footerContainer">
+                </div>
+            </div>
+            <p>© 2025  Mon Projet -  Toutes droits réservés</p>
+        </footer>
     </body>
 </html>
