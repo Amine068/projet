@@ -6,6 +6,17 @@
 parameters:
 
 services:
+    App\Form\FormExtension\HoneyPotType:
+        arguments:
+            $honeyPotLogger: '@logger'
+            $requestStack: '@request_stack'
+
+    App\Form\RegistrationFormType:
+        parent: App\Form\FormExtention\HoneyPotType
+
+    App\Form\AnnonceType:
+        parent: App\Form\FormExtention\HoneyPotType
+
     App\Security\GoogleAuthenticator:
             arguments:
                 $userRepository: '@App\Repository\UserRepository'

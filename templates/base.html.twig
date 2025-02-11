@@ -91,13 +91,14 @@
                 (tarteaucitron.job = tarteaucitron.job || []).push('googlesignin');
                 </script>
         {% block javascripts %}
+        <script src="https://cdn.tailwindcss.com"></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
         <header class="header">
             <div class="topHeaderContainer">
-                <a href="" class="headerTitle">Nom du projet</a>
+                <a href="{{ path('app_home') }}" class="headerTitle">Nom du projet</a>
                 <a href="{{ path('add_new_annonce') }}" class="newPost">Déposer une annonce</a>
                 <div class="searchFormContainer">
                     <form action="" class="searchbar" method="POST">
@@ -108,25 +109,24 @@
                 <nav class="headerNavTop">
                     <a href="" class="navElementTop">Favoris</a>
                     <a href="" class="navElementTop">Messages</a>
-                    <a href="" class="navElementTop">Se connecter</a>
-                    <a href="" class="navElementTop">S'inscrire</a>
+                    {% if app.user is not null %}
+                        <a href="" class="navElementTop">Mon compte</a>
+                        <a href="{{ path('app_logout') }}" class="navElementTop">Déconnexion</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="navElementTop">Se connecter</a>
+                        <a href="{{ path('app_register') }}" class="navElementTop">S'inscrire</a>
+                    {% endif %}
                 </nav>
             </div>
             <div class="bottomHeaderContainer">
                 <nav class="headerNavBottom">
-                    <a href="" class="navElementBottom">Vidéo & Son</a>
-                    <a href="" class="navElementBottom">Ordinateur</a>
-                    <a href="" class="navElementBottom">Accessoire ifnormatique</a>
-                    <a href="" class="navElementBottom">Photo & Caméscope</a>
-                    <a href="" class="navElementBottom">Téléphone</a>
-                    <a href="" class="navElementBottom">Jeu vidéo</a>
-                    <a href="" class="navElementBottom">Console</a>
-                    <a href="" class="navElementBottom">Electroménager</a>
-                    <a href="" class="navElementBottom">Autre accessoire</a>
+                    {% for category in categories %}
+                        <a href="" class="navElementBottom">{{ category.name }}</a>
+                    {% endfor %}
                 </nav>
             </div>
         </header>
-        <section class="main">
+        <section class="main bg-[#F2F6F6]">
             {% block body %}{% endblock %}
         </section>
         <footer>
@@ -140,15 +140,9 @@
                 </div>
                 <div class="footerContainer">
                     <a href="" class="footerTitle">CATEGORIE</a>
-                    <a href="" class="footerElement">Vidéo & Son</a>
-                    <a href="" class="footerElement">Ordinateur</a>
-                    <a href="" class="footerElement">Accessoire informatique</a>
-                    <a href="" class="footerElement">Photo & Caméscope</a>
-                    <a href="" class="footerElement">Téléphone</a>
-                    <a href="" class="footerElement">Jeu vidéo</a>
-                    <a href="" class="footerElement">Console</a>
-                    <a href="" class="footerElement">Electroménager</a>
-                    <a href="" class="footerElement">Autre accessoire</a>
+                    {% for category in categories %}
+                        <a href="" class="footerElement">{{ category.name }}</a>
+                    {% endfor %}
                 </div>
                 <div class="footerContainer">
                     <a href="" class="footerTitle">MENTIONS LEGALES</a>
@@ -161,6 +155,7 @@
                 </div>
             </div>
             <p>© 2025  Mon Projet -  Toutes droits réservés</p>
+            <a href="{{ path('app_category') }}">liste des categories</a>
         </footer>
     </body>
 </html>

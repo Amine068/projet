@@ -35,17 +35,24 @@ class Annonce
     #[ORM\Column(length: 50)]
     private ?string $zipcode = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => false])]
     private ?bool $isValidated = null;
 
     #[ORM\Column]
     private ?bool $isVisible = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => false])]
     private ?bool $isLocked = null;
 
     #[ORM\Column]
     private ?int $telephone = null;
+
+    #[ORM\ManyToOne(inversedBy: 'annonces')]
+    private ?Subcategory $Subcategory = null;
+
+    #[ORM\ManyToOne(inversedBy: 'annonces')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -180,6 +187,30 @@ class Annonce
     public function setTelephone(int $telephone): static
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getSubcategory(): ?Subcategory
+    {
+        return $this->Subcategory;
+    }
+
+    public function setSubcategory(?Subcategory $Subcategory): static
+    {
+        $this->Subcategory = $Subcategory;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

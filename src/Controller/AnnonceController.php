@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Annonce;
+use App\Entity\Category;
 use App\Form\AnnonceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +24,12 @@ final class AnnonceController extends AbstractController
 
     #[Route('/annonce/new', name: 'add_new_annonce')]
     #[Route('/annonce/{id}/edit', name: 'edit_annonce')]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function newedit(?Annonce $annonce, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $categories = $entityManager->getRepository(Category::class)->findAll();
+
         if (!$annonce) {
             $annonce = new Annonce();
         }
@@ -34,14 +38,21 @@ final class AnnonceController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
+            $annonce = $form->getData();
+            $annonce->setDateOfPost(new \DateTime());
+            $annonce->setUser($this->getUser());
+            $annonce->setIsValidated(false);
+            $annonce->setIsLocked(false);
+
             $entityManager->persist($annonce);
             $entityManager->flush();
     
-            return $this->redirectToRoute('app_annonce_show', ['id' => $annonce->getId()]);
+            return $this->redirectToRoute('show_annonce', ['id' => $annonce->getId()]);
         }
     
         return $this->render('annonce/newedit.html.twig', [
             'form' => $form,
+            'categories' => $categories
         ]);
     }
 
@@ -55,10 +66,14 @@ final class AnnonceController extends AbstractController
     }
 
     #[Route('/annonce/{id}', name: 'show_annonce')]
-    public function show(Annonce $annonce): Response
+    public function show(Annonce $annonce, EntityManagerInterface $entityManager): Response
     {
+        $categories = $entityManager->getRepository(Category::class)->findAll();
+
+
         return $this->render('annonce/show.html.twig', [
             'annonce' => $annonce,
+            'categories' => $categories
         ]);
     }
 }
