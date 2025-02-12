@@ -48,7 +48,7 @@ class Annonce
     private ?int $telephone = null;
 
     #[ORM\ManyToOne(inversedBy: 'annonces')]
-    private ?Subcategory $Subcategory = null;
+    private ?Subcategory $subcategory = null;
 
     #[ORM\ManyToOne(inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
@@ -193,12 +193,12 @@ class Annonce
 
     public function getSubcategory(): ?Subcategory
     {
-        return $this->Subcategory;
+        return $this->subcategory;
     }
 
-    public function setSubcategory(?Subcategory $Subcategory): static
+    public function setSubcategory(?Subcategory $subcategory): static
     {
-        $this->Subcategory = $Subcategory;
+        $this->subcategory = $subcategory;
 
         return $this;
     }

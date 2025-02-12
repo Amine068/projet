@@ -34,7 +34,7 @@ final class AnnonceController extends AbstractController
             $annonce = new Annonce();
         }
     
-        $form = $this->createForm(AnnonceType::class, $annonce);
+        $form = $this->createForm(AnnonceType::class, $annonce, ['action' => $this->generateUrl('add_new_annonce')]);
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {

@@ -52,26 +52,28 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/category/{id}/add-subcategory', name: 'add_subcategory')]
-    #[Route('/category/{category}/edit-subcategory/{subcategory}', name: 'edit_subcategory')]
-    public function addSubCategory(Category $category, Subcategory $subcategory = null,EntityManagerInterface $entityManager, Request $request): Response
+    #[Route('/category/{category}/add-subcategory', name: 'add_subcategory')]
+    #[Route('/category/{category}/edit-subcategory/{subCategory}', name: 'edit_subcategory')]
+    public function addSubCategoryToCategory(Category $category, Subcategory $subCategory = null,EntityManagerInterface $entityManager, Request $request): Response
     {
+        // for header
         $categories = $entityManager->getRepository(Category::class)->findAll();
 
-        if ($subcategory == null) {
-            $subcategory = new Subcategory();
+
+        if ($subCategory == null) {
+            $subCategory = new Subcategory();
         }
 
-        $form = $this->createForm(SubcategoryType::class, $subcategory);
+        $form = $this->createForm(SubcategoryType::class, $subCategory);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $subcategory = $form->getData();
+            $subCategory = $form->getData();
 
-            $category->addSubcategory($subcategory);
+            $category->addSubcategory($subCategory);
 
             $entityManager->persist($category);
-            $entityManager->persist($subcategory);
+            $entityManager->persist($subCategory);
             $entityManager->flush();
 
             return $this->redirectToRoute('show_category', ['id' => $category->getId()]);

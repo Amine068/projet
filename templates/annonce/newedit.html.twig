@@ -11,7 +11,7 @@
 
     {{ form_errors(form) }}
 
-    {{ form_start(form) }}
+    {{ form_start(form, {attr: {id: 'newAnnonceForm'}}) }}
     {{ form_row(form.title) }}
     {{ form_row(form.description) }}
     {{ form_row(form.price) }}
@@ -30,6 +30,7 @@
         {{ form_errors(form.faxNumber) }}
         {{ form_widget(form.faxNumber) }}
     </fieldset>
-    {{ form_row(form.subCategory) }}
+    {{ form_row(form.Category) }}
+    {{ form_row(form.subcategory) }}
     {{ form_end(form) }}
 {% endblock %}
